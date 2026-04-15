@@ -2,7 +2,7 @@
 
 Run **Filebrowser** and **Syncthing** services on a jailbroken Kindle, controlled through a native touch UI, or KUAL.
 
-![assets/filemanagers-screenshot.png]
+!(screenshot)[assets/filemanagers-screenshot.png]
 
 ## Features
 
