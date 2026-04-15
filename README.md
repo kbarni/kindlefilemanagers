@@ -2,6 +2,8 @@
 
 Run **Filebrowser** and **Syncthing** services on a jailbroken Kindle, controlled through a native touch UI, or KUAL.
 
+![assets/filemanagers-screenshot.png]
+
 ## Features
 
 - **Filebrowser** — browse, upload and download files on your Kindle from any browser on the same Wi-Fi network. No desktop software required; just open a URL.
