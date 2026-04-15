@@ -1,0 +1,46 @@
+# Syncthing upstart script
+# For Kindle
+start on started wmt
+stop on stopping filesystems
+
+respawn
+respawn limit 5 60
+
+# Configuration variables
+env BASE_PATH=/mnt/us/filemanagers
+env BIN_PATH=/mnt/us/filemanagers/bin/syncthing
+env DATA_PATH=/mnt/us/filemanagers/settings
+env LOG_PATH=/mnt/us/filemanagers/settings/syncthing.log
+env GUI_PORT=8384
+env SYNC_PORT=22000
+env DISCOVERY_PORT=21027
+
+pre-start script
+    # Ensure binary is executable and data directory exists
+    chmod +x "$BIN_PATH"
+    mkdir -p "$DATA_PATH"
+    
+    # Open sync ports
+    iptables -A INPUT -p tcp --dport $SYNC_PORT -j ACCEPT 2>/dev/null || true
+    iptables -A INPUT -p udp --dport $SYNC_PORT -j ACCEPT 2>/dev/null || true
+    iptables -A INPUT -p udp --dport $DISCOVERY_PORT -j ACCEPT 2>/dev/null || true
+    
+    # Open GUI port in firewall (standard if enabled)
+    iptables -A INPUT -p tcp --dport $GUI_PORT -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT 2>/dev/null || true
+    iptables -A OUTPUT -p tcp --sport $GUI_PORT -m conntrack --ctstate ESTABLISHED -j ACCEPT 2>/dev/null || true
+end script
+
+post-stop script
+    # Close sync ports
+    iptables -D INPUT -p tcp --dport $SYNC_PORT -j ACCEPT 2>/dev/null || true
+    iptables -D INPUT -p udp --dport $SYNC_PORT -j ACCEPT 2>/dev/null || true
+    iptables -D INPUT -p udp --dport $DISCOVERY_PORT -j ACCEPT 2>/dev/null || true
+    
+    # Close GUI port
+    iptables -D INPUT -p tcp --dport $GUI_PORT -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT 2>/dev/null || true
+    iptables -D OUTPUT -p tcp --sport $GUI_PORT -m conntrack --ctstate ESTABLISHED -j ACCEPT 2>/dev/null || true
+end script
+
+script
+    exec "$BIN_PATH" --no-browser --home="$DATA_PATH" --logfile="$LOG_PATH" --log-max-size=1000 --log-max-old-files=1
+end script

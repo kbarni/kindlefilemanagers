@@ -1,0 +1,40 @@
+# Filebrowser upstart script
+# For Kindle
+start on started wmt
+stop on stopping filesystems
+
+respawn
+respawn limit 5 60
+
+# Configuration variables
+env BIN_PATH=/mnt/us/filemanagers/bin/filebrowser
+env DATA_PATH=/mnt/us
+env DB_PATH=/mnt/us/filemanagers/filebrowser.db
+env CONFIG_PATH=/mnt/us/filemanagers/config.json
+env LOG_PATH=/mnt/us/filemanagers/filebrowser.log
+env PORT=80
+
+pre-start script
+    # Ensure binary is executable
+    chmod +x "$BIN_PATH"
+    
+    # Initialize configuration if it doesn't exist
+    if [ ! -f "$DB_PATH" ]; then
+        "$BIN_PATH" -d "$DB_PATH" -c "$CONFIG_PATH" config init > /dev/null 2>&1
+        "$BIN_PATH" -d "$DB_PATH" -c "$CONFIG_PATH" users add admin admin12345678 --perm.admin > /dev/null 2>&1
+    fi
+    
+    # Open port in firewall
+    iptables -A INPUT -p tcp --dport $PORT -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT 2>/dev/null || true
+    iptables -A OUTPUT -p tcp --sport $PORT -m conntrack --ctstate ESTABLISHED -j ACCEPT 2>/dev/null || true
+end script
+
+post-stop script
+    # Close port in firewall
+    iptables -D INPUT -p tcp --dport $PORT -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT 2>/dev/null || true
+    iptables -D OUTPUT -p tcp --sport $PORT -m conntrack --ctstate ESTABLISHED -j ACCEPT 2>/dev/null || true
+end script
+
+script
+    exec "$BIN_PATH" -a 0.0.0.0 -r "$DATA_PATH" -p "$PORT" -l "$LOG_PATH" -d "$DB_PATH" -c "$CONFIG_PATH"
+end script

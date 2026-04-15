@@ -1,0 +1,301 @@
+/* filemanagers - e-ink Kindle WAF stylesheet */
+/* WebKit 533 compatible: no flexbox, no grid, no CSS variables */
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 44px;
+    line-height: 1.45;
+    color: #000;
+    background: #fff;
+    padding: 8px 20px 10px 20px;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Header */
+.header {
+    position: relative;
+    text-align: center;
+    padding: 6px 0 12px 0;
+    border-bottom: 3px solid #000;
+    margin-bottom: 14px;
+}
+
+.header h1 {
+    font-size: 58px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.btn-close {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    min-width: 70px;
+    min-height: 70px;
+    padding: 6px 18px;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: sans-serif;
+    border: 3px solid #000;
+    background: #fff;
+    color: #000;
+    -webkit-appearance: none;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    line-height: 1;
+}
+
+.btn-close:active,
+.btn-close.btn-active {
+    background: #000;
+    color: #fff;
+}
+
+/* Service cards */
+.service-card {
+    border: 3px solid #000;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+    background: #fff;
+}
+
+.card-desc {
+    font-size: 36px;
+    line-height: 1.4;
+    color: #222;
+    padding: 8px 0 4px 0;
+    margin-top: 6px;
+    border-top: 1px dashed #bbb;
+}
+
+.card-row {
+    position: relative;
+    overflow: hidden;
+    min-height: 90px;
+}
+
+.card-toggle {
+    float: left;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin-right: 14px;
+    margin-top: 4px;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.card-toggle img {
+    width: 82px;
+    height: 82px;
+    display: block;
+}
+
+.card-icon {
+    display: inline-block;
+    width: 68px;
+    height: 68px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.card-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    font-size: 54px;
+    font-weight: bold;
+    line-height: 90px;
+    text-align: center;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.card-toggle:active,
+.card-toggle.btn-active {
+    opacity: 0.5;
+}
+
+.card-option {
+    padding: 10px 0 4px 0;
+}
+
+.card-option label {
+    font-size: 38px;
+    cursor: pointer;
+}
+
+.card-option input[type="checkbox"] {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.card-status {
+    font-size: 36px;
+    padding: 10px 0 2px 0;
+    border-top: 1px dashed #888;
+    margin-top: 10px;
+    color: #000;
+    min-height: 44px;
+}
+
+.card-status.running {
+    font-weight: bold;
+}
+
+.card-status.stopped {
+    font-style: italic;
+    color: #444;
+}
+
+.card-status .url {
+    font-family: monospace;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Advanced settings */
+.advanced {
+    border: 3px solid #000;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #f4f4f4;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.advanced-header {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #f4f4f4;
+    border: 0;
+    padding: 14px 20px;
+    font-size: 48px;
+    font-weight: bold;
+    font-family: sans-serif;
+    -webkit-appearance: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.advanced-header:active,
+.advanced-header.btn-active {
+    background: #d8d8d8;
+}
+
+.adv-arrow {
+    float: left;
+    width: 36px;
+    height: 36px;
+    margin-top: 8px;
+    margin-right: 12px;
+}
+
+.adv-icon {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin-right: 14px;
+    margin-top: 2px;
+}
+
+.adv-title {
+    line-height: 56px;
+}
+
+.advanced-body {
+    display: none;
+    padding: 16px 20px 20px 20px;
+    border-top: 2px solid #000;
+}
+
+.advanced-body.visible {
+    display: block;
+}
+
+.adv-note {
+    font-size: 34px;
+    line-height: 1.4;
+    color: #222;
+    margin-bottom: 14px;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    width: 100%;
+    min-height: 80px;
+    padding: 16px 24px;
+    font-size: 38px;
+    font-weight: bold;
+    font-family: sans-serif;
+    border: 3px solid #000;
+    background: #fff;
+    color: #000;
+    text-align: center;
+    margin-bottom: 12px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:active,
+.btn.btn-active {
+    background: #000;
+    color: #fff;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    font-size: 30px;
+    color: #555;
+    padding: 10px 0;
+    border-top: 1px solid #bbb;
+    margin-top: 8px;
+}
+
+/* Toast / message bar */
+.message-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 14px 20px;
+    border-top: 3px solid #000;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    background: #e0e0e0;
+    z-index: 200;
+}
+
+.message-bar.visible {
+    display: block;
+}
+
+.message-bar.error {
+    background: #fff;
+    border-top-style: dashed;
+}

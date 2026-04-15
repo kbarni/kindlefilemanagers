@@ -1,0 +1,58 @@
+{
+	"items": [
+		{
+			"name": "File Managers",
+			"priority": 0,
+			"items": [
+				{
+					"name": "Start Filebrowser",
+					"priority": 1,
+					"action": "./filebrowser.sh start",
+					"status": false
+				},
+				{
+					"name": "Stop Filebrowser",
+					"priority": 2,
+					"action": "./filebrowser.sh stop",
+					"status": false
+				},
+				{
+					"name": "Filebrowser status",
+					"priority": 3,
+					"action": "./filebrowser.sh status",
+					"status": false
+				},
+{
+					"name": "Syncthing config mode",
+					"priority": 1,
+					"action": "./syncthing.sh config",
+					"status": false
+				},
+				{
+					"name": "Start Syncthing",
+					"priority": 2,
+					"action": "./syncthing.sh start",
+					"status": false
+				},
+				{
+					"name": "Stop Syncthing",
+					"priority": 3,
+					"action": "./syncthing.sh stop",
+					"status": false
+				},
+				{
+					"name": "Syncthing status",
+					"priority": 4,
+					"action": "./syncthing.sh status",
+					"status": false
+				},
+                {
+					"name": "About file managers",
+					"priority": 4,
+					"action": "./info.sh",
+					"status": false
+                }
+			]
+		}
+	]
+}

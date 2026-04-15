@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>File Managers</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div class="header">
+        <h1>Kindle File Management Services</h1>
+        <button id="btnBack" class="btn-close">&#x2715;</button>
+    </div>
+
+    <div id="messageBar" class="message-bar"></div>
+
+    <!-- Filebrowser card -->
+    <div class="service-card">
+        <div class="card-row">
+            <button id="btnFbToggle" class="card-toggle">
+                <img id="imgFbToggle" src="images/toggle_off.png" alt="off" />
+            </button>
+            <div class="card-title">
+                <img class="card-icon" src="images/filebrowser.png" alt="" />File Browser
+            </div>
+        </div>
+        <div class="card-desc">
+            Browse, upload and download files on your device through a simple
+            web interface. Useful to transfer books or documents from any
+            computer or phone on the same Wi-Fi network.
+        </div>
+        <div id="statusFb" class="card-status">checking status&hellip;</div>
+    </div>
+
+    <!-- Syncthing card -->
+    <div class="service-card">
+        <div class="card-row">
+            <button id="btnStToggle" class="card-toggle">
+                <img id="imgStToggle" src="images/toggle_off.png" alt="off" />
+            </button>
+            <div class="card-title">
+                <img class="card-icon" src="images/syncthing.png" alt="" />Syncthing
+            </div>
+        </div>
+        <div class="card-desc">
+            Continuously synchronise folders between your device and other
+            computers running Syncthing. Files are kept up to date
+            automatically in the background, with no cloud server in between.
+        </div>
+        <div class="card-option">
+            <label for="chkStConfig">
+                <input type="checkbox" id="chkStConfig" />
+                Start with configuration interface
+            </label>
+        </div>
+        <div id="statusSt" class="card-status">checking status&hellip;</div>
+    </div>
+
+    <!-- Advanced settings (collapsible) -->
+    <div class="advanced">
+        <button id="btnAdvToggle" class="advanced-header">
+            <img id="imgAdvArrow" class="adv-arrow" src="images/arrow_down.png" alt="" />
+            <img class="adv-icon" src="images/settings.png" alt="" />
+            <span class="adv-title">Advanced settings</span>
+        </button>
+        <div id="advancedBody" class="advanced-body">
+            <p class="adv-note">
+                Install the startup scripts to start services automatically at every boot. 
+                <b>Warning! This operation modifies the root filesystem!</b>
+            </p>
+            <button id="btnInstallFb" class="btn">Install filebrowser service</button>
+            <button id="btnInstallStartup" class="btn">Install syncthing service</button>
+        </div>
+    </div>
+
+    <div class="footer">filemanagers &middot; kbarni</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
