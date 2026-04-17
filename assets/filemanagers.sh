@@ -5,18 +5,19 @@
 # DontUseFBInk
 
 APP_ID="com.kbarni.filemanagers"
-SOURCE_DIR="/mnt/us/filemanagers/app"
+MAIN_DIR="/mnt/us/filemanagers"
+APP_DIR="$MAIN_DIR/app"
 TARGET_DIR="/var/local/mesquite/filemanagers"
 APPREG_DB="/var/local/appreg.db"
-LOG_FILE="/mnt/us/filemanagers/filemanagers.log"
+LOG_FILE="$MAIN_DIR/filemanagers.log"
 
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') $1" >> "$LOG_FILE"; }
 
 # Ensure Utild is running
 # Utild (KindleForge-style): run Utild if binaries exist
-BINARY="$APP_SOURCE_DIR/utild/UtildSF"
+BINARY="$MAIN_DIR/utild/UtildSF"
 if [ -e /lib/ld-linux-armhf.so.3 ]; then
-  BINARY="$APP_SOURCE_DIR/utild/UtildHF"
+  BINARY="$MAIN_DIR/utild/UtildHF"
 fi
 
 if [ -e "$BINARY" ]; then
@@ -28,18 +29,18 @@ fi
 log "Scriptlet starting"
 
 # Install/update WAF copy
-if [ -d "$SOURCE_DIR" ]; then
+if [ -d "$APP_DIR" ]; then
     [ -d "$TARGET_DIR" ] && rm -rf "$TARGET_DIR"
-    cp -r "$SOURCE_DIR" "$TARGET_DIR"
+    cp -r "$APP_DIR" "$TARGET_DIR"
     log "WAF copied to $TARGET_DIR"
 else
-    log "ERROR: source dir missing: $SOURCE_DIR"
+    log "ERROR: source dir missing: $APP_DIR"
     exit 1
 fi
 
 # Ensure service scripts are executable
-chmod +x /mnt/us/filemanagers/filebrowser.sh 2>/dev/null
-chmod +x /mnt/us/filemanagers/syncthing.sh   2>/dev/null
+chmod +x "$MAIN_DIR/filebrowser.sh" 2>/dev/null
+chmod +x "$MAIN_DIR/syncthing.sh"   2>/dev/null
 
 # Register app
 if [ -f "$APPREG_DB" ]; then
